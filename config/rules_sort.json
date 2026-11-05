@@ -1,0 +1,72 @@
+{
+  "problem": "sort_integers",
+  "description": "Read n and then n integers. Print them in ascending order on one line.",
+  "time_limit_s": 2,
+  "memory_limit_mb": 128,
+  "metrics": [
+    {
+      "name": "correctness",
+      "analyzer": "io_tests",
+      "weight": 0.30,
+      "params": { "testset_dir": "../test_cases/sort/" }
+    },
+    {
+      "name": "logical",
+      "analyzer": "edge_case_runner",
+      "weight": 0.15,
+      "params": {
+        "cases": ["all"],
+        "input_spec": { "kind": "array" },
+        "reference_solution": "../references/sort_reference.c",
+        "seed": 7
+      }
+    },
+    {
+      "name": "complexity",
+      "analyzer": "complexity_estimator",
+      "weight": 0.20,
+      "params": {
+        "required": "O(n log n)",
+        "sizes": [100, 200, 400, 800, 1600, 3200],
+        "input_template": "{n}\n{ints:n:-100000:100000}\n",
+        "time_limit_s": 5,
+        "seed": 7
+      }
+    },
+    {
+      "name": "memory_safety",
+      "analyzer": "sanitizer_run",
+      "weight": 0.10,
+      "params": { "flags": "-fsanitize=address,undefined" }
+    },
+    {
+      "name": "structure",
+      "analyzer": "static_analysis",
+      "weight": 0.05,
+      "params": { "max_cyclomatic": 10, "max_function_length": 50 }
+    },
+    {
+      "name": "modularity",
+      "analyzer": "function_split",
+      "weight": 0.05,
+      "params": { "min_functions": 3 }
+    },
+    {
+      "name": "readability",
+      "analyzer": "llm_review",
+      "weight": 0.05
+    },
+    {
+      "name": "originality",
+      "analyzer": "similarity_flag",
+      "weight": 0.05,
+      "params": { "corpus_dir": "../corpus/sort/" }
+    },
+    {
+      "name": "banned_calls",
+      "analyzer": "pattern_check",
+      "weight": 0.05,
+      "params": { "forbid_calls": ["gets", "system"] }
+    }
+  ]
+}

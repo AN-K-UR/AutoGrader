@@ -1,0 +1,106 @@
+===== Grading report for add_leak.c =====
+Problem:  add_two_integers
+Rules:    rules.json (sha256:12336dea230f...)
+Source:   sha256:5f91c317e8f1...
+Run at:   2026-10-30T21:50:35Z
+Sandbox:  seatbelt
+
+Overall grade: 88.50 / 100
+Status:   complete
+
+Metric           Weight        Marks  Verdict
+------------------------------------------------------------------------
+correctness         20%    20.0/20.0  10 of 10 tests pass.
+syntax              10%    10.0/10.0  No compiler warnings.
+structure           10%     8.5/10.0  1 cppcheck finding(s); 0 function(s) over thresholds.
+modularity          10%     2.5/10.0  Only main() is defined.
+logical             10%    10.0/10.0  27 of 27 generated corner cases pass.
+complexity          10%    10.0/10.0  Estimated O(1), within the required O(1).
+memory_safety       10%     7.5/10.0  1 distinct memory or undefined-behaviour issue(s) found.
+readability         10%    10.0/10.0  Reads cleanly on all criteria.
+originality         10%    10.0/10.0  Max similarity 0.16 against 4 file(s); not flagged.
+------------------------------------------------------------------------
+Formula: grade = 100 * sum(weight_i * score_i) / sum(applicable_weights)
+Applicable weight: 1 of 1
+
+--- Compilation ---
+Compiled:  yes (Apple clang version 21.0.0 (clang-2100.1.1.101))
+Flags:     -O2 -Wall -Wextra -std=c11
+Smoke run: exited cleanly in 0.201 s
+Static sanity: all checks passed
+
+--- Test cases ---
+correctness: 10 of 10 tests pass
+  01           passed       0.008s
+  02           passed       0.008s
+  03           passed       0.008s
+  04           passed       0.007s
+  05           passed       0.007s
+  06           passed       0.007s
+  07           passed       0.007s
+  08           passed       0.007s
+  09           passed       0.007s
+  10           passed       0.007s
+
+--- Where you failed ---
+No failing input was found.
+
+--- Code analysis findings ---
+  cppcheck line 14 [error]: Memory leak: total
+  allocation tracker: 8 bytes in 1 block(s) not freed at exit
+  Note: Absence of diagnostics covers only the exercised inputs and does not prove memory safety.
+
+--- Readability and complexity ---
+  main(): cyclomatic 3, 10 lines
+  Growth: estimated O(1), required O(1) (confidence low)
+  Operation counts: n=1: 2, n=10: 2, n=100: 2
+  Readability: identifiers 1.00, comments 1.00, formatting 1.00, function_length 1.00, nesting 1.00
+
+--- Similarity ---
+  Max similarity 0.16 against 4 file(s); not flagged.
+  online/tutorial_add.c (online): similarity 0.16, containment 0.23
+  llm/assistant_add.c (llm): similarity 0.13, containment 0.25
+  peers/peer_b.c (peers): similarity 0.09, containment 0.26
+  Similarity is a reason for review. It does not prove copying.
+
+--- Skipped checks and limitations ---
+  None.
+
+--- Suggestions to raise the grade ---
+  - [modularity] Only 1 function(s) defined; at least 2 expected. Extract a helper from main().
+  - [memory_safety] allocation tracker reported 8 bytes in 1 block(s) not freed at exit.
+  - [structure] Line 14: Memory leak: total (memleak)
+
+
+------------------------------------------------------------------------
+Usefulness and limitations of this evaluation
+------------------------------------------------------------------------
+Useful for:
+1. First-pass grading of large programming classes
+   Example: A lab of 300 students submits add.c. The agent grades each one unattended under the same rules, so two teaching assistants no longer apply different standards, and a hung submission costs only its time limit.
+   Benefit: Consistent, repeatable marks, with staff time moved to reviewing the unusual cases.
+2. Instant formative feedback before a deadline
+   Example: A student whose program prints -2147483648 for 2147483647 + 1 sees that exact input, the expected output, and a note that a gap of 2^32 is the signature of 32-bit overflow, then fixes it the same evening.
+   Benefit: Students learn from a specific failing case rather than a bare mark.
+3. Plagiarism and LLM-copy triage for instructors
+   Example: A renamed copy of a peer's program scores 1.00 against the 0.85 threshold, so the agent flags that pair. The instructor reviews flagged pairs rather than all 300 submissions.
+   Benefit: Manual checking is narrowed to the suspicious cases, with the decision left to a person.
+4. Coding-interview and hiring screens
+   Example: A company runs 500 candidate solutions for a sorting task. The agent separates O(n log n) from O(n^2) solutions using operation counts and reports corner-case failures for each candidate.
+   Benefit: Fast first-round filtering in which every rejection can be explained metric by metric.
+Limits of this report:
+1. Tests cannot prove correctness
+   Example: submissions/examples/add_passes_but_wrong.c returns 0 only for the input 31337 271828. No test or generated case tries that input, so the agent reports 10/10 tests and full marks for a wrong program.
+   Fix: Add property-based inputs and a larger seeded random budget, and treat a pass as evidence, not proof.
+2. Sanitizers only see executed paths
+   Example: submissions/examples/add_hidden_memory_bug.c overflows a heap block only when the first number is 31337. No input reaches it, so memory_safety reports no diagnostics and full marks, and the bug remains.
+   Fix: Add Cppcheck-style static checks, widen the inputs, and never present a clean sanitizer run as proof of safety.
+3. Complexity estimates cannot see inside library calls
+   Example: A loop that calls strlen(text) in its condition is really O(n^2), but libc is not instrumented, so only the loop's own blocks are counted and the agent reports O(n). See tests/test_limitations.py.
+   Fix: Combine with a timing curve or treat known linear libc calls in loops as a warning. Report the estimate as an estimate.
+4. Similarity gives false positives on trivial problems
+   Example: Two students independently write the shortest possible add.c. With so few tokens their normalized programs are identical, so the agent reports similarity 1.00 and raises a flag although neither copied.
+   Fix: The report labels very short programs as low confidence, and a flag only ever asks for human review. Exclude starter code with template_file.
+5. Similarity misses structural rewrites and unseen sources
+   Example: An LLM-written solution that is absent from the corpus, or a copy reordered into differently shaped functions, scores low and is not flagged. The agent cannot search the internet or identify LLM authorship.
+   Fix: Seed the corpus with solutions generated by common LLMs and public tutorials, and use viva questions to confirm ownership.

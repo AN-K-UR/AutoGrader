@@ -1,0 +1,1000 @@
+{
+  "schema_version": "1.0",
+  "submission": "add_exit_error.c",
+  "submission_id": "add_exit_error-a557789e",
+  "problem": "add_two_integers",
+  "source_hash": "sha256:a557789eca282c447b9ef17dcf62f4c8c866b6162530d3872dc514a9ee1a459f",
+  "rules_file": "rules.json",
+  "rules_hash": "sha256:12336dea230fa80c536e2e3a07a75e48f9d67b4b69fe433c5fdf3d496b8177f1",
+  "testset_hash": "sha256:c8a04d543224fc5fd493ebaa7422f64163894a4fb44149411df5aae67f21f922",
+  "timestamp": "2026-10-30T21:50:25Z",
+  "grade": 62.5,
+  "evaluation_status": "complete",
+  "grade_fingerprint": "sha256:c1f86e736f588892701bf2826628d07776b68fd5c7bb39a2b6fe9d8fe807c7e6",
+  "scoring": {
+    "grade": 62.5,
+    "status": "complete",
+    "formula": "grade = 100 * sum(weight_i * score_i) / sum(applicable_weights)",
+    "applicable_weight": 1.0,
+    "total_weight": 1.0,
+    "excluded_metrics": [],
+    "zeroed_metrics": [],
+    "policy": {
+      "unavailable_policy": "renormalize",
+      "compile_failure_policy": "partial",
+      "weight_sum_policy": "error"
+    }
+  },
+  "first_pass": {
+    "compiled": true,
+    "smoke_ok": false,
+    "smoke_ran": true,
+    "suspected_infinite_loop": false,
+    "smoke_crashed": true,
+    "smoke_detail": "The program exited with status 3 instead of 0.",
+    "static_sanity": {
+      "has_main": true,
+      "calls_reader": true,
+      "calls_writer": true,
+      "main_returns": true
+    }
+  },
+  "compilation": {
+    "success": true,
+    "compiler": "gcc",
+    "compiler_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+    "flags": [
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-std=c11"
+    ],
+    "exit_code": 0,
+    "output": "",
+    "diagnostics": []
+  },
+  "execution": {
+    "name": "seatbelt",
+    "isolated": true,
+    "guarantees": "macOS sandbox-exec: file writes, fork/exec of other programs, network connections and reads outside system paths are denied for the program; memory enforced by polling the physical footprint",
+    "limits": {
+      "time_limit_s": 1.0,
+      "memory_limit_mb": 64
+    }
+  },
+  "metrics": [
+    {
+      "name": "correctness",
+      "analyzer": "io_tests",
+      "status": "scored",
+      "score": 0.0,
+      "weight": 0.2,
+      "contribution": 0.0,
+      "max_contribution": 20.0,
+      "threshold": 0.6,
+      "met_threshold": false,
+      "feedback": "0 of 10 tests pass.",
+      "evidence": {
+        "tests_passed": 0,
+        "tests_total": 10,
+        "comparison": "trim_trailing",
+        "status_counts": {
+          "failed": 10
+        },
+        "results": [
+          {
+            "test_id": "01",
+            "status": "failed",
+            "description": "Sample from the problem statement",
+            "input": "7 5\n",
+            "expected": "12\n",
+            "actual": "12\n",
+            "stderr": "",
+            "exit_code": 3,
+            "duration_s": 0.0078,
+            "peak_memory_kb": 3648,
+            "comparison": "trim_trailing",
+            "diagnostic": "The program exited with status 3 instead of 0."
+          },
+          {
+            "test_id": "02",
+            "status": "failed",
+            "description": "Both zero",
+            "input": "0 0\n",
+            "expected": "0\n",
+            "actual": "0\n",
+            "stderr": "",
+            "exit_code": 3,
+            "duration_s": 0.0075,
+            "peak_memory_kb": 3648,
+            "comparison": "trim_trailing",
+            "diagnostic": "The program exited with status 3 instead of 0."
+          },
+          {
+            "test_id": "03",
+            "status": "failed",
+            "description": "Both negative",
+            "input": "-3 -4\n",
+            "expected": "-7\n",
+            "actual": "-7\n",
+            "stderr": "",
+            "exit_code": 3,
+            "duration_s": 0.0076,
+            "peak_memory_kb": 3648,
+            "comparison": "trim_trailing",
+            "diagnostic": "The program exited with status 3 instead of 0."
+          },
+          {
+            "test_id": "04",
+            "status": "failed",
+            "description": "Opposites cancel",
+            "input": "-10 10\n",
+            "expected": "0\n",
+            "actual": "0\n",
+            "stderr": "",
+            "exit_code": 3,
+            "duration_s": 0.0075,
+            "peak_memory_kb": 3648,
+            "comparison": "trim_trailing",
+            "diagnostic": "The program exited with status 3 instead of 0."
+          },
+          {
+            "test_id": "05",
+            "status": "failed",
+            "description": "Large positive values",
+            "input": "1000000 2000000\n",
+            "expected": "3000000\n",
+            "actual": "3000000\n",
+            "stderr": "",
+            "exit_code": 3,
+            "duration_s": 0.0073,
+            "peak_memory_kb": 3648,
+            "comparison": "trim_trailing",
+            "diagnostic": "The program exited with status 3 instead of 0."
+          },
+          {
+            "test_id": "06",
+            "status": "failed",
+            "description": "INT_MAX plus zero",
+            "input": "2147483647 0\n",
+            "expected": "2147483647\n",
+            "actual": "2147483647\n",
+            "stderr": "",
+            "exit_code": 3,
+            "duration_s": 0.0074,
+            "peak_memory_kb": 3648,
+            "comparison": "trim_trailing",
+            "diagnostic": "The program exited with status 3 instead of 0."
+          },
+          {
+            "test_id": "07",
+            "status": "failed",
+            "description": "INT_MAX + 1 must not overflow",
+            "input": "2147483647 1\n",
+            "expected": "2147483648\n",
+            "actual": "2147483648\n",
+            "stderr": "",
+            "exit_code": 3,
+            "duration_s": 0.0075,
+            "peak_memory_kb": 3648,
+            "comparison": "trim_trailing",
+            "diagnostic": "The program exited with status 3 instead of 0."
+          },
+          {
+            "test_id": "08",
+            "status": "failed",
+            "description": "INT_MIN - 1 must not overflow",
+            "input": "-2147483648 -1\n",
+            "expected": "-2147483649\n",
+            "actual": "-2147483649\n",
+            "stderr": "",
+            "exit_code": 3,
+            "duration_s": 0.0074,
+            "peak_memory_kb": 3648,
+            "comparison": "trim_trailing",
+            "diagnostic": "The program exited with status 3 instead of 0."
+          },
+          {
+            "test_id": "09",
+            "status": "failed",
+            "description": "Extra spaces around the numbers",
+            "input": "  8    9  \n",
+            "expected": "17\n",
+            "actual": "17\n",
+            "stderr": "",
+            "exit_code": 3,
+            "duration_s": 0.0074,
+            "peak_memory_kb": 3648,
+            "comparison": "trim_trailing",
+            "diagnostic": "The program exited with status 3 instead of 0."
+          },
+          {
+            "test_id": "10",
+            "status": "failed",
+            "description": "Tab as the separator",
+            "input": "6\t4\n",
+            "expected": "10\n",
+            "actual": "10\n",
+            "stderr": "",
+            "exit_code": 3,
+            "duration_s": 0.009,
+            "peak_memory_kb": 3648,
+            "comparison": "trim_trailing",
+            "diagnostic": "The program exited with status 3 instead of 0."
+          }
+        ]
+      },
+      "counterexamples": [
+        {
+          "test_id": "01",
+          "input": "7 5\n",
+          "expected": "12\n",
+          "got": "12\n",
+          "why": "The program exited with status 3 instead of 0.",
+          "origin": "testset",
+          "category": null,
+          "outcome": "failed"
+        },
+        {
+          "test_id": "02",
+          "input": "0 0\n",
+          "expected": "0\n",
+          "got": "0\n",
+          "why": "The program exited with status 3 instead of 0.",
+          "origin": "testset",
+          "category": null,
+          "outcome": "failed"
+        },
+        {
+          "test_id": "03",
+          "input": "-3 -4\n",
+          "expected": "-7\n",
+          "got": "-7\n",
+          "why": "The program exited with status 3 instead of 0.",
+          "origin": "testset",
+          "category": null,
+          "outcome": "failed"
+        },
+        {
+          "test_id": "04",
+          "input": "-10 10\n",
+          "expected": "0\n",
+          "got": "0\n",
+          "why": "The program exited with status 3 instead of 0.",
+          "origin": "testset",
+          "category": null,
+          "outcome": "failed"
+        },
+        {
+          "test_id": "05",
+          "input": "1000000 2000000\n",
+          "expected": "3000000\n",
+          "got": "3000000\n",
+          "why": "The program exited with status 3 instead of 0.",
+          "origin": "testset",
+          "category": null,
+          "outcome": "failed"
+        },
+        {
+          "test_id": "06",
+          "input": "2147483647 0\n",
+          "expected": "2147483647\n",
+          "got": "2147483647\n",
+          "why": "The program exited with status 3 instead of 0.",
+          "origin": "testset",
+          "category": null,
+          "outcome": "failed"
+        },
+        {
+          "test_id": "07",
+          "input": "2147483647 1\n",
+          "expected": "2147483648\n",
+          "got": "2147483648\n",
+          "why": "The program exited with status 3 instead of 0.",
+          "origin": "testset",
+          "category": null,
+          "outcome": "failed"
+        },
+        {
+          "test_id": "08",
+          "input": "-2147483648 -1\n",
+          "expected": "-2147483649\n",
+          "got": "-2147483649\n",
+          "why": "The program exited with status 3 instead of 0.",
+          "origin": "testset",
+          "category": null,
+          "outcome": "failed"
+        },
+        {
+          "test_id": "09",
+          "input": "  8    9  \n",
+          "expected": "17\n",
+          "got": "17\n",
+          "why": "The program exited with status 3 instead of 0.",
+          "origin": "testset",
+          "category": null,
+          "outcome": "failed"
+        },
+        {
+          "test_id": "10",
+          "input": "6\t4\n",
+          "expected": "10\n",
+          "got": "10\n",
+          "why": "The program exited with status 3 instead of 0.",
+          "origin": "testset",
+          "category": null,
+          "outcome": "failed"
+        }
+      ]
+    },
+    {
+      "name": "syntax",
+      "analyzer": "compiler_warnings",
+      "status": "scored",
+      "score": 1.0,
+      "weight": 0.1,
+      "contribution": 10.0,
+      "max_contribution": 10.0,
+      "threshold": null,
+      "met_threshold": null,
+      "feedback": "No compiler warnings.",
+      "evidence": {
+        "flags": [
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-std=c11"
+        ],
+        "warnings": []
+      },
+      "counterexamples": []
+    },
+    {
+      "name": "structure",
+      "analyzer": "static_analysis",
+      "status": "scored",
+      "score": 1.0,
+      "weight": 0.1,
+      "contribution": 10.0,
+      "max_contribution": 10.0,
+      "threshold": null,
+      "met_threshold": null,
+      "feedback": "0 cppcheck finding(s); 0 function(s) over thresholds.",
+      "evidence": {
+        "cppcheck_findings": [],
+        "functions": [
+          {
+            "name": "main",
+            "cyclomatic": 2,
+            "length": 8,
+            "tokens": 44,
+            "parameters": 0,
+            "line": 4
+          }
+        ],
+        "thresholds": {
+          "max_cyclomatic": 8,
+          "max_function_length": 40
+        }
+      },
+      "counterexamples": []
+    },
+    {
+      "name": "modularity",
+      "analyzer": "function_split",
+      "status": "scored",
+      "score": 0.25,
+      "weight": 0.1,
+      "contribution": 2.5,
+      "max_contribution": 10.0,
+      "threshold": null,
+      "met_threshold": null,
+      "feedback": "Only main() is defined.",
+      "evidence": {
+        "functions_defined": 1,
+        "expected_min": 2,
+        "names": [
+          "main"
+        ],
+        "helpers_reachable_from_main": [],
+        "helpers_unused": [],
+        "main_share_of_function_lines": 1.0,
+        "criteria": {
+          "function_count": 0.5,
+          "helpers_called": 0.0,
+          "main_share": 0.0
+        }
+      },
+      "counterexamples": []
+    },
+    {
+      "name": "logical",
+      "analyzer": "edge_case_runner",
+      "status": "scored",
+      "score": 0.0,
+      "weight": 0.1,
+      "contribution": 0.0,
+      "max_contribution": 10.0,
+      "threshold": null,
+      "met_threshold": null,
+      "feedback": "0 of 27 generated corner cases pass. Failing categories: int_boundaries, int_overflow, negatives, random, whitespace, zero.",
+      "evidence": {
+        "cases_passed": 0,
+        "cases_total": 27,
+        "by_category": {
+          "negatives": {
+            "passed": 0,
+            "total": 4
+          },
+          "zero": {
+            "passed": 0,
+            "total": 4
+          },
+          "int_overflow": {
+            "passed": 0,
+            "total": 4
+          },
+          "int_boundaries": {
+            "passed": 0,
+            "total": 4
+          },
+          "whitespace": {
+            "passed": 0,
+            "total": 6
+          },
+          "random": {
+            "passed": 0,
+            "total": 5
+          }
+        },
+        "seed": 42,
+        "oracle": "reference_solution",
+        "unusable_cases": [
+          "empty_input-1",
+          "empty_input-2"
+        ]
+      },
+      "counterexamples": [
+        {
+          "test_id": "zero-1",
+          "input": "0 0\n",
+          "expected": "0\n",
+          "got": "0\n",
+          "why": "The program exited with status 3 instead of 0. The input includes zero. Check division, loop bounds, and special cases.",
+          "origin": "generated",
+          "category": "zero",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "zero-2",
+          "input": "0 5\n",
+          "expected": "5\n",
+          "got": "5\n",
+          "why": "The program exited with status 3 instead of 0. The input includes zero. Check division, loop bounds, and special cases.",
+          "origin": "generated",
+          "category": "zero",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "zero-3",
+          "input": "5 0\n",
+          "expected": "5\n",
+          "got": "5\n",
+          "why": "The program exited with status 3 instead of 0. The input includes zero. Check division, loop bounds, and special cases.",
+          "origin": "generated",
+          "category": "zero",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "negatives-2",
+          "input": "-7 5\n",
+          "expected": "-2\n",
+          "got": "-2\n",
+          "why": "The program exited with status 3 instead of 0. The input is negative. Check for signed arithmetic and for conditions that assume positive values.",
+          "origin": "generated",
+          "category": "negatives",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "negatives-3",
+          "input": "9 -9\n",
+          "expected": "0\n",
+          "got": "0\n",
+          "why": "The program exited with status 3 instead of 0. The input is negative. Check for signed arithmetic and for conditions that assume positive values.",
+          "origin": "generated",
+          "category": "negatives",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "whitespace-6",
+          "input": "82 15",
+          "expected": "97\n",
+          "got": "97\n",
+          "why": "The program exited with status 3 instead of 0. The numbers are separated by unusual whitespace. Read with scanf or another reader that skips whitespace, not with a fixed line layout.",
+          "origin": "generated",
+          "category": "whitespace",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "zero-4",
+          "input": "0 -5\n",
+          "expected": "-5\n",
+          "got": "-5\n",
+          "why": "The program exited with status 3 instead of 0. The input includes zero. Check division, loop bounds, and special cases.",
+          "origin": "generated",
+          "category": "zero",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "negatives-1",
+          "input": "-1 -2\n",
+          "expected": "-3\n",
+          "got": "-3\n",
+          "why": "The program exited with status 3 instead of 0. The input is negative. Check for signed arithmetic and for conditions that assume positive values.",
+          "origin": "generated",
+          "category": "negatives",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "whitespace-2",
+          "input": "82\t15\n",
+          "expected": "97\n",
+          "got": "97\n",
+          "why": "The program exited with status 3 instead of 0. The numbers are separated by unusual whitespace. Read with scanf or another reader that skips whitespace, not with a fixed line layout.",
+          "origin": "generated",
+          "category": "whitespace",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "whitespace-3",
+          "input": "82\n15\n",
+          "expected": "97\n",
+          "got": "97\n",
+          "why": "The program exited with status 3 instead of 0. The numbers are separated by unusual whitespace. Read with scanf or another reader that skips whitespace, not with a fixed line layout.",
+          "origin": "generated",
+          "category": "whitespace",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "whitespace-1",
+          "input": "82  15\n",
+          "expected": "97\n",
+          "got": "97\n",
+          "why": "The program exited with status 3 instead of 0. The numbers are separated by unusual whitespace. Read with scanf or another reader that skips whitespace, not with a fixed line layout.",
+          "origin": "generated",
+          "category": "whitespace",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "negatives-4",
+          "input": "-1000 -1\n",
+          "expected": "-1001\n",
+          "got": "-1001\n",
+          "why": "The program exited with status 3 instead of 0. The input is negative. Check for signed arithmetic and for conditions that assume positive values.",
+          "origin": "generated",
+          "category": "negatives",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "whitespace-4",
+          "input": "82\n\n  15\n",
+          "expected": "97\n",
+          "got": "97\n",
+          "why": "The program exited with status 3 instead of 0. The numbers are separated by unusual whitespace. Read with scanf or another reader that skips whitespace, not with a fixed line layout.",
+          "origin": "generated",
+          "category": "whitespace",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "whitespace-5",
+          "input": "  82 15  \n",
+          "expected": "97\n",
+          "got": "97\n",
+          "why": "The program exited with status 3 instead of 0. The numbers are separated by unusual whitespace. Read with scanf or another reader that skips whitespace, not with a fixed line layout.",
+          "origin": "generated",
+          "category": "whitespace",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "int_boundaries-1",
+          "input": "2147483647 0\n",
+          "expected": "2147483647\n",
+          "got": "2147483647\n",
+          "why": "The program exited with status 3 instead of 0. The input uses INT_MIN or INT_MAX. Check every intermediate value and any negation or absolute value.",
+          "origin": "generated",
+          "category": "int_boundaries",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "int_boundaries-4",
+          "input": "2147483646 1\n",
+          "expected": "2147483647\n",
+          "got": "2147483647\n",
+          "why": "The program exited with status 3 instead of 0. The input uses INT_MIN or INT_MAX. Check every intermediate value and any negation or absolute value.",
+          "origin": "generated",
+          "category": "int_boundaries",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "int_overflow-1",
+          "input": "2147483647 1\n",
+          "expected": "2147483648\n",
+          "got": "2147483648\n",
+          "why": "The program exited with status 3 instead of 0. The input sits at the limit of a 32-bit int, so the arithmetic can overflow. Use long long, or check for overflow before the operation.",
+          "origin": "generated",
+          "category": "int_overflow",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "int_boundaries-2",
+          "input": "-2147483648 0\n",
+          "expected": "-2147483648\n",
+          "got": "-2147483648\n",
+          "why": "The program exited with status 3 instead of 0. The input uses INT_MIN or INT_MAX. Check every intermediate value and any negation or absolute value.",
+          "origin": "generated",
+          "category": "int_boundaries",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "random-5",
+          "input": "419141 553292\n",
+          "expected": "972433\n",
+          "got": "972433\n",
+          "why": "The program exited with status 3 instead of 0. A random valid input. Trace your program by hand on this input.",
+          "origin": "generated",
+          "category": "random",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "int_overflow-2",
+          "input": "-2147483648 -1\n",
+          "expected": "-2147483649\n",
+          "got": "-2147483649\n",
+          "why": "The program exited with status 3 instead of 0. The input sits at the limit of a 32-bit int, so the arithmetic can overflow. Use long long, or check for overflow before the operation.",
+          "origin": "generated",
+          "category": "int_overflow",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "random-1",
+          "input": "-947549 555144\n",
+          "expected": "-392405\n",
+          "got": "-392405\n",
+          "why": "The program exited with status 3 instead of 0. A random valid input. Trace your program by hand on this input.",
+          "origin": "generated",
+          "category": "random",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "random-4",
+          "input": "544492 -785053\n",
+          "expected": "-240561\n",
+          "got": "-240561\n",
+          "why": "The program exited with status 3 instead of 0. A random valid input. Trace your program by hand on this input.",
+          "origin": "generated",
+          "category": "random",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "random-2",
+          "input": "-423222 -486425\n",
+          "expected": "-909647\n",
+          "got": "-909647\n",
+          "why": "The program exited with status 3 instead of 0. A random valid input. Trace your program by hand on this input.",
+          "origin": "generated",
+          "category": "random",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "random-3",
+          "input": "-531894 -707368\n",
+          "expected": "-1239262\n",
+          "got": "-1239262\n",
+          "why": "The program exited with status 3 instead of 0. A random valid input. Trace your program by hand on this input.",
+          "origin": "generated",
+          "category": "random",
+          "outcome": "failed"
+        },
+        {
+          "test_id": "int_overflow-3",
+          "input": "2147483647 2147483647\n",
+          "expected": "4294967294\n",
+          "got": "4294967294\n",
+          "why": "The program exited with status 3 instead of 0. The input sits at the limit of a 32-bit int, so the arithmetic can overflow. Use long long, or check for overflow before the operation.",
+          "origin": "generated",
+          "category": "int_overflow",
+          "outcome": "failed"
+        }
+      ]
+    },
+    {
+      "name": "complexity",
+      "analyzer": "complexity_estimator",
+      "status": "scored",
+      "score": 1.0,
+      "weight": 0.1,
+      "contribution": 10.0,
+      "max_contribution": 10.0,
+      "threshold": null,
+      "met_threshold": null,
+      "feedback": "Estimated O(1), within the required O(1).",
+      "evidence": {
+        "required": "O(1)",
+        "estimated": "O(1)",
+        "sizes": [
+          1,
+          10,
+          100
+        ],
+        "operation_counts": [
+          2,
+          2,
+          2
+        ],
+        "fit_errors": {
+          "O(1)": 0.0,
+          "O(log n)": 0.0,
+          "O(n)": 0.0,
+          "O(n log n)": 0.0,
+          "O(n^2)": 0.0,
+          "O(n^3)": 0.0,
+          "O(2^n)": 0.0
+        },
+        "method": "basic-block counts at -O0, fitted to growth classes",
+        "confidence": "low"
+      },
+      "counterexamples": []
+    },
+    {
+      "name": "memory_safety",
+      "analyzer": "sanitizer_run",
+      "status": "scored",
+      "score": 1.0,
+      "weight": 0.1,
+      "contribution": 10.0,
+      "max_contribution": 10.0,
+      "threshold": null,
+      "met_threshold": null,
+      "feedback": "No diagnostics on 10 exercised input(s).",
+      "evidence": {
+        "inputs_exercised": 10,
+        "flags": [
+          "-fsanitize=address,undefined"
+        ],
+        "diagnostics": [],
+        "note": "Absence of diagnostics covers only the exercised inputs and does not prove memory safety."
+      },
+      "counterexamples": []
+    },
+    {
+      "name": "readability",
+      "analyzer": "llm_review",
+      "status": "scored",
+      "score": 1.0,
+      "weight": 0.1,
+      "contribution": 10.0,
+      "max_contribution": 10.0,
+      "threshold": null,
+      "met_threshold": null,
+      "feedback": "Reads cleanly on all criteria.",
+      "evidence": {
+        "method": "deterministic checks; any LLM text is advisory and unscored",
+        "criteria": {
+          "identifiers": 1.0,
+          "comments": 1.0,
+          "formatting": 1.0,
+          "function_length": 1.0,
+          "nesting": 1.0
+        },
+        "identifiers": {
+          "names_checked": 3,
+          "short_names": []
+        },
+        "comments": {
+          "comments": 1,
+          "non_blank_lines": 10
+        },
+        "formatting": {
+          "lines_checked": 8,
+          "multiple_statements": [],
+          "cramped_operators": [],
+          "unindented": [],
+          "long_lines": []
+        },
+        "function_lengths": [
+          9
+        ],
+        "max_nesting_by_function": [
+          1
+        ],
+        "llm": {
+          "model": "llama3.1",
+          "temperature": 0,
+          "seed": 42,
+          "status": "unavailable",
+          "reason": "ollama not reachable: <urlopen error [Errno 61] Connection refused>"
+        }
+      },
+      "counterexamples": []
+    },
+    {
+      "name": "originality",
+      "analyzer": "similarity_flag",
+      "status": "scored",
+      "score": 1.0,
+      "weight": 0.1,
+      "contribution": 10.0,
+      "max_contribution": 10.0,
+      "threshold": null,
+      "met_threshold": null,
+      "feedback": "Max similarity 0.28 against 4 file(s); not flagged.",
+      "evidence": {
+        "metric": "Jaccard over 5-token shingles of normalized tokens",
+        "comparisons": 4,
+        "max_similarity": 0.2841,
+        "closest": "llm/assistant_add.c",
+        "threshold": 0.85,
+        "containment_threshold": 0.95,
+        "submission_shingles": 41,
+        "top_matches": [
+          {
+            "target": "llm/assistant_add.c",
+            "kind": "llm",
+            "jaccard": 0.2841,
+            "containment": 0.6098
+          },
+          {
+            "target": "peers/peer_b.c",
+            "kind": "peers",
+            "jaccard": 0.1656,
+            "containment": 0.6098
+          },
+          {
+            "target": "online/tutorial_add.c",
+            "kind": "online",
+            "jaccard": 0.1351,
+            "containment": 0.2439
+          }
+        ],
+        "style_signals_advisory": [],
+        "limitations": "Similarity is grounds for review, not proof. It cannot see sources outside the corpus and cannot identify LLM authorship."
+      },
+      "counterexamples": []
+    }
+  ],
+  "flags": [
+    {
+      "type": "smoke_crashed",
+      "detail": "The program exited with status 3 instead of 0."
+    }
+  ],
+  "feedback": {
+    "where_you_failed": [
+      {
+        "test_id": "01",
+        "input": "7 5\n",
+        "expected": "12\n",
+        "got": "12\n",
+        "why": "The program exited with status 3 instead of 0.",
+        "origin": "testset",
+        "category": null,
+        "outcome": "failed"
+      },
+      {
+        "test_id": "zero-1",
+        "input": "0 0\n",
+        "expected": "0\n",
+        "got": "0\n",
+        "why": "The program exited with status 3 instead of 0. The input includes zero. Check division, loop bounds, and special cases.",
+        "origin": "generated",
+        "category": "zero",
+        "outcome": "failed"
+      },
+      {
+        "test_id": "negatives-2",
+        "input": "-7 5\n",
+        "expected": "-2\n",
+        "got": "-2\n",
+        "why": "The program exited with status 3 instead of 0. The input is negative. Check for signed arithmetic and for conditions that assume positive values.",
+        "origin": "generated",
+        "category": "negatives",
+        "outcome": "failed"
+      },
+      {
+        "test_id": "whitespace-6",
+        "input": "82 15",
+        "expected": "97\n",
+        "got": "97\n",
+        "why": "The program exited with status 3 instead of 0. The numbers are separated by unusual whitespace. Read with scanf or another reader that skips whitespace, not with a fixed line layout.",
+        "origin": "generated",
+        "category": "whitespace",
+        "outcome": "failed"
+      },
+      {
+        "test_id": "int_boundaries-1",
+        "input": "2147483647 0\n",
+        "expected": "2147483647\n",
+        "got": "2147483647\n",
+        "why": "The program exited with status 3 instead of 0. The input uses INT_MIN or INT_MAX. Check every intermediate value and any negation or absolute value.",
+        "origin": "generated",
+        "category": "int_boundaries",
+        "outcome": "failed"
+      }
+    ],
+    "suggestions": [
+      {
+        "metric": "correctness",
+        "marks_lost": 20.0,
+        "text": "Fix the failure on test 01: The program exited with status 3 instead of 0."
+      },
+      {
+        "metric": "logical",
+        "marks_lost": 10.0,
+        "text": "Handle the int boundaries case: The program exited with status 3 instead of 0. The input includes zero. Check division, loop bounds, and special cases."
+      },
+      {
+        "metric": "modularity",
+        "marks_lost": 7.5,
+        "text": "Only 1 function(s) defined; at least 2 expected. Extract a helper from main()."
+      }
+    ],
+    "skipped_checks": [],
+    "advisory_llm_remarks": []
+  },
+  "tool_versions": {
+    "compiler": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+    "lizard": "1.24.3",
+    "cppcheck": "Cppcheck 2.22.0 from cppcheck-wheel 1.5.3"
+  },
+  "usefulness_limitations": {
+    "usefulness": [
+      {
+        "use_case": "First-pass grading of large programming classes",
+        "example": "A lab of 300 students submits add.c. The agent grades each one unattended under the same rules, so two teaching assistants no longer apply different standards, and a hung submission costs only its time limit.",
+        "benefit": "Consistent, repeatable marks, with staff time moved to reviewing the unusual cases."
+      },
+      {
+        "use_case": "Instant formative feedback before a deadline",
+        "example": "A student whose program prints -2147483648 for 2147483647 + 1 sees that exact input, the expected output, and a note that a gap of 2^32 is the signature of 32-bit overflow, then fixes it the same evening.",
+        "benefit": "Students learn from a specific failing case rather than a bare mark."
+      },
+      {
+        "use_case": "Plagiarism and LLM-copy triage for instructors",
+        "example": "A renamed copy of a peer's program scores 1.00 against the 0.85 threshold, so the agent flags that pair. The instructor reviews flagged pairs rather than all 300 submissions.",
+        "benefit": "Manual checking is narrowed to the suspicious cases, with the decision left to a person."
+      },
+      {
+        "use_case": "Coding-interview and hiring screens",
+        "example": "A company runs 500 candidate solutions for a sorting task. The agent separates O(n log n) from O(n^2) solutions using operation counts and reports corner-case failures for each candidate.",
+        "benefit": "Fast first-round filtering in which every rejection can be explained metric by metric."
+      }
+    ],
+    "limitations": [
+      {
+        "limitation": "Tests cannot prove correctness",
+        "example": "submissions/examples/add_passes_but_wrong.c returns 0 only for the input 31337 271828. No test or generated case tries that input, so the agent reports 10/10 tests and full marks for a wrong program.",
+        "mitigation": "Add property-based inputs and a larger seeded random budget, and treat a pass as evidence, not proof."
+      },
+      {
+        "limitation": "Sanitizers only see executed paths",
+        "example": "submissions/examples/add_hidden_memory_bug.c overflows a heap block only when the first number is 31337. No input reaches it, so memory_safety reports no diagnostics and full marks, and the bug remains.",
+        "mitigation": "Add Cppcheck-style static checks, widen the inputs, and never present a clean sanitizer run as proof of safety."
+      },
+      {
+        "limitation": "Complexity estimates cannot see inside library calls",
+        "example": "A loop that calls strlen(text) in its condition is really O(n^2), but libc is not instrumented, so only the loop's own blocks are counted and the agent reports O(n). See tests/test_limitations.py.",
+        "mitigation": "Combine with a timing curve or treat known linear libc calls in loops as a warning. Report the estimate as an estimate."
+      },
+      {
+        "limitation": "Similarity gives false positives on trivial problems",
+        "example": "Two students independently write the shortest possible add.c. With so few tokens their normalized programs are identical, so the agent reports similarity 1.00 and raises a flag although neither copied.",
+        "mitigation": "The report labels very short programs as low confidence, and a flag only ever asks for human review. Exclude starter code with template_file."
+      },
+      {
+        "limitation": "Similarity misses structural rewrites and unseen sources",
+        "example": "An LLM-written solution that is absent from the corpus, or a copy reordered into differently shaped functions, scores low and is not flagged. The agent cannot search the internet or identify LLM authorship.",
+        "mitigation": "Seed the corpus with solutions generated by common LLMs and public tutorials, and use viva questions to confirm ownership."
+      }
+    ]
+  }
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AutoGrader</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>AutoGrader</h1>
+      <p class="muted">Rule-driven evaluation of C programs</p>
+    </div>
+    <dl class="system" id="system" aria-label="System status"></dl>
+  </header>
+
+  <main class="layout">
+    <section class="panel input-panel" aria-labelledby="submission-title">
+      <h2 id="submission-title">Submission</h2>
+
+      <label for="rules">Rule set</label>
+      <select id="rules"></select>
+      <p class="muted small" id="rules-detail"></p>
+
+      <label for="sample">Start from a sample</label>
+      <select id="sample"><option value="">Choose a sample…</option></select>
+
+      <label for="file">Or upload a .c file</label>
+      <input type="file" id="file" accept=".c">
+
+      <label for="filename">File name</label>
+      <input type="text" id="filename" value="submission.c" spellcheck="false" autocomplete="off">
+
+      <label for="source">Source code</label>
+      <textarea id="source" spellcheck="false" autocomplete="off" wrap="off"
+                placeholder="Paste C code here, choose a sample, or upload a file."></textarea>
+
+      <label class="check" id="llm-row">
+        <input type="checkbox" id="use-llm">
+        <span id="llm-label">Add local LLM remarks (never affects the grade)</span>
+      </label>
+
+      <button type="button" id="grade">Grade submission</button>
+      <p class="error" id="error" role="alert" hidden></p>
+    </section>
+
+    <section class="results" id="results" aria-live="polite">
+      <div class="panel empty" id="empty">
+        <h2>No report yet</h2>
+        <p class="muted">Pick a sample or paste a program, then grade it. The program is compiled
+          and run in a sandbox on this computer. Nothing is uploaded anywhere.</p>
+      </div>
+    </section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

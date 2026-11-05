@@ -1,0 +1,20 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.o
+*.bin
+*.dSYM/
+a.out
+autograder-*/
+.env
+.env.*
+*.gguf
+.DS_Store
+# Generated runs; curated examples live in reports/samples/.
+reports/*
+!reports/samples/
+!reports/samples/**
+dist/
+.claude/

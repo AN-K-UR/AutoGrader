@@ -1,0 +1,17 @@
+[project]
+name = "autograder"
+version = "1.0.0"
+description = "A rule-driven automatic evaluator for student C programs"
+requires-python = ">=3.9"
+dependencies = ["lizard>=1.17", "cppcheck>=1.5"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+markers = [
+    "seatbelt: needs macOS sandbox-exec",
+    "cppcheck: needs the cppcheck binary",
+]

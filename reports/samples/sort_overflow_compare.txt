@@ -1,0 +1,119 @@
+===== Grading report for sort_overflow_compare.c =====
+Problem:  sort_integers
+Rules:    rules_sort.json (sha256:a454aca0ee26...)
+Source:   sha256:38199394d69c...
+Run at:   2026-10-30T21:51:06Z
+Sandbox:  seatbelt
+
+Overall grade: 88.04 / 100
+Status:   complete
+
+Metric           Weight        Marks  Verdict
+------------------------------------------------------------------------
+correctness         30%    25.0/30.0  5 of 6 tests pass.
+logical             15%    13.5/15.0  18 of 20 generated corner cases pass. Failing categories: extreme_v...
+complexity          20%    20.0/20.0  Estimated O(n log n), within the required O(n log n).
+memory_safety       10%     7.5/10.0  1 distinct memory or undefined-behaviour issue(s) found.
+structure            5%      5.0/5.0  0 cppcheck finding(s); 0 function(s) over thresholds.
+modularity           5%      2.1/5.0  2 functions, 0 helper(s) in use.
+readability          5%      4.9/5.0  Reads cleanly on all criteria.
+originality          5%      5.0/5.0  Max similarity 0.20 against 1 file(s); not flagged.
+banned_calls         5%      5.0/5.0  All source rules satisfied.
+------------------------------------------------------------------------
+Formula: grade = 100 * sum(weight_i * score_i) / sum(applicable_weights)
+Applicable weight: 1 of 1
+
+--- Compilation ---
+Compiled:  yes (Apple clang version 21.0.0 (clang-2100.1.1.101))
+Flags:     -O2 -Wall -Wextra -std=c11
+Smoke run: exited cleanly in 0.189 s
+Static sanity: all checks passed
+
+--- Test cases ---
+correctness: 5 of 6 tests pass
+  01           passed       0.008s
+  02           passed       0.007s
+  03           passed       0.007s
+  04           passed       0.007s
+  05           passed       0.007s
+  06           failed       0.007s
+
+--- Where you failed ---
+Test 06 [failed]
+  INPUT:    3\n2147483647 -2147483648 0
+  EXPECTED: -2147483648 0 2147483647
+  GOT:      2147483647 -2147483648 0
+  WHY:      First difference is on line 1: expected '-2147483648 0 2147483647', got '2147483647 -2147483648 0'.
+
+Generated case extreme_values-1 [failed]
+  INPUT:    3\n2147483647 -2147483648 0
+  EXPECTED: -2147483648 0 2147483647
+  GOT:      2147483647 -2147483648 0
+  WHY:      First difference is on line 1: expected '-2147483648 0 2147483647', got '2147483647 -2147483648 0'. The input has very large magnitudes. Comparisons by subtraction overflow; compare with < and > instead.
+
+Generated case extreme_values-3 [failed]
+  INPUT:    3\n-2147483648 2147483647 -2147483648
+  EXPECTED: -2147483648 -2147483648 2147483647
+  GOT:      2147483647 -2147483648 -2147483648
+  WHY:      First difference is on line 1: expected '-2147483648 -2147483648 2147483647', got '2147483647 -2147483648 -2147483648'. The input has very large magnitudes. Comparisons by subtraction overflow; compare with < and > instead.
+
+--- Code analysis findings ---
+  UndefinedBehaviorSanitizer line 6: signed integer overflow: 2147483647 - -2147483648 cannot be represented in type 'int'
+  Note: Absence of diagnostics covers only the exercised inputs and does not prove memory safety.
+
+--- Readability and complexity ---
+  Growth: estimated O(n log n), required O(n log n) (confidence moderate)
+  Operation counts: n=100: 787, n=200: 1834, n=400: 4181, n=800: 9180, n=1600: 20439, n=3200: 45654
+  compare_ints(): cyclomatic 1, 3 lines
+  main(): cyclomatic 9, 22 lines
+  Readability: identifiers 1.00, comments 0.89, formatting 1.00, function_length 1.00, nesting 1.00
+
+--- Similarity ---
+  Max similarity 0.20 against 1 file(s); not flagged.
+  peers/peer_insertion.c (peers): similarity 0.20, containment 0.27
+  Similarity is a reason for review. It does not prove copying.
+
+--- Skipped checks and limitations ---
+  None.
+
+--- Suggestions to raise the grade ---
+  - [correctness] Fix the failure on test 06: First difference is on line 1: expected '-2147483648 0 2147483647', got '2147483647 -2147483648 0'.
+  - [modularity] Only 2 function(s) defined; at least 3 expected. Extract a helper from main().
+  - [modularity] Helper(s) never called from main(): compare_ints.
+  - [modularity] main() holds 88% of the function lines. Move more logic into helpers.
+  - [memory_safety] UndefinedBehaviorSanitizer reported signed integer overflow: 2147483647 - -2147483648 cannot be represented in type 'int' at line 6.
+  - [logical] Handle the extreme values case: First difference is on line 1: expected '-2147483648 0 2147483647', got '2147483647 -2147483648 0'. The input has very large magnitudes. Comparisons by subtraction overflow; compare with < and > instead.
+
+
+------------------------------------------------------------------------
+Usefulness and limitations of this evaluation
+------------------------------------------------------------------------
+Useful for:
+1. First-pass grading of large programming classes
+   Example: A lab of 300 students submits add.c. The agent grades each one unattended under the same rules, so two teaching assistants no longer apply different standards, and a hung submission costs only its time limit.
+   Benefit: Consistent, repeatable marks, with staff time moved to reviewing the unusual cases.
+2. Instant formative feedback before a deadline
+   Example: A student whose program prints -2147483648 for 2147483647 + 1 sees that exact input, the expected output, and a note that a gap of 2^32 is the signature of 32-bit overflow, then fixes it the same evening.
+   Benefit: Students learn from a specific failing case rather than a bare mark.
+3. Plagiarism and LLM-copy triage for instructors
+   Example: A renamed copy of a peer's program scores 1.00 against the 0.85 threshold, so the agent flags that pair. The instructor reviews flagged pairs rather than all 300 submissions.
+   Benefit: Manual checking is narrowed to the suspicious cases, with the decision left to a person.
+4. Coding-interview and hiring screens
+   Example: A company runs 500 candidate solutions for a sorting task. The agent separates O(n log n) from O(n^2) solutions using operation counts and reports corner-case failures for each candidate.
+   Benefit: Fast first-round filtering in which every rejection can be explained metric by metric.
+Limits of this report:
+1. Tests cannot prove correctness
+   Example: submissions/examples/add_passes_but_wrong.c returns 0 only for the input 31337 271828. No test or generated case tries that input, so the agent reports 10/10 tests and full marks for a wrong program.
+   Fix: Add property-based inputs and a larger seeded random budget, and treat a pass as evidence, not proof.
+2. Sanitizers only see executed paths
+   Example: submissions/examples/add_hidden_memory_bug.c overflows a heap block only when the first number is 31337. No input reaches it, so memory_safety reports no diagnostics and full marks, and the bug remains.
+   Fix: Add Cppcheck-style static checks, widen the inputs, and never present a clean sanitizer run as proof of safety.
+3. Complexity estimates cannot see inside library calls
+   Example: A loop that calls strlen(text) in its condition is really O(n^2), but libc is not instrumented, so only the loop's own blocks are counted and the agent reports O(n). See tests/test_limitations.py.
+   Fix: Combine with a timing curve or treat known linear libc calls in loops as a warning. Report the estimate as an estimate.
+4. Similarity gives false positives on trivial problems
+   Example: Two students independently write the shortest possible add.c. With so few tokens their normalized programs are identical, so the agent reports similarity 1.00 and raises a flag although neither copied.
+   Fix: The report labels very short programs as low confidence, and a flag only ever asks for human review. Exclude starter code with template_file.
+5. Similarity misses structural rewrites and unseen sources
+   Example: An LLM-written solution that is absent from the corpus, or a copy reordered into differently shaped functions, scores low and is not flagged. The agent cannot search the internet or identify LLM authorship.
+   Fix: Seed the corpus with solutions generated by common LLMs and public tutorials, and use viva questions to confirm ownership.

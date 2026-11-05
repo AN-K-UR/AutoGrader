@@ -1,0 +1,5 @@
+# Static analysis tools; both are optional at runtime and reported as skipped if absent.
+lizard==1.24.3
+cppcheck==1.5.3
+# Test suite only.
+pytest==8.4.2

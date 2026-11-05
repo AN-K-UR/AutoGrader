@@ -1,0 +1,68 @@
+{
+  "problem": "add_two_integers",
+  "description": "Read two integers on one line and print their sum followed by a newline.",
+  "time_limit_s": 1,
+  "memory_limit_mb": 64,
+  "metrics": [
+    {
+      "name": "correctness",
+      "analyzer": "io_tests",
+      "weight": 0.20,
+      "threshold": 0.6,
+      "params": { "testset_dir": "../test_cases/add/", "comparison": "trim_trailing" }
+    },
+    {
+      "name": "syntax",
+      "analyzer": "compiler_warnings",
+      "weight": 0.10,
+      "params": { "flags": "-Wall -Wextra -Werror -std=c11" }
+    },
+    {
+      "name": "structure",
+      "analyzer": "static_analysis",
+      "weight": 0.10,
+      "params": { "max_cyclomatic": 8, "max_function_length": 40 }
+    },
+    {
+      "name": "modularity",
+      "analyzer": "function_split",
+      "weight": 0.10,
+      "params": { "expect_helpers": true, "min_functions": 2 }
+    },
+    {
+      "name": "logical",
+      "analyzer": "edge_case_runner",
+      "weight": 0.10,
+      "params": {
+        "cases": ["negatives", "zero", "int_overflow", "int_boundaries", "whitespace", "empty_input", "random"],
+        "input_spec": { "kind": "ints", "count": 2 },
+        "reference_solution": "../references/add_reference.c",
+        "seed": 42
+      }
+    },
+    {
+      "name": "complexity",
+      "analyzer": "complexity_estimator",
+      "weight": 0.10,
+      "params": { "required": "O(1)", "sizes": [1, 10, 100], "input_template": "{n} {n}\n" }
+    },
+    {
+      "name": "memory_safety",
+      "analyzer": "sanitizer_run",
+      "weight": 0.10,
+      "params": { "flags": "-fsanitize=address,undefined" }
+    },
+    {
+      "name": "readability",
+      "analyzer": "llm_review",
+      "weight": 0.10,
+      "params": { "use_llm": true, "model": "llama3.1", "llm_timeout_s": 180, "temperature": 0, "seed": 42 }
+    },
+    {
+      "name": "originality",
+      "analyzer": "similarity_flag",
+      "weight": 0.10,
+      "params": { "corpus_dir": "../corpus/add/", "flag_threshold": 0.85 }
+    }
+  ]
+}

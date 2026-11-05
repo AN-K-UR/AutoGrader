@@ -1,0 +1,550 @@
+{
+  "schema_version": "1.0",
+  "submission": "sort_correct.c",
+  "submission_id": "sort_correct-7ef11e7b",
+  "problem": "sort_integers",
+  "source_hash": "sha256:7ef11e7b9581f7fdf1dcc86e9440b0142c90fd25cc29c97a76e38ea186d01737",
+  "rules_file": "rules_sort.json",
+  "rules_hash": "sha256:a454aca0ee2673356aebe3db864e34e24bd1e221ad74446e2724b5bafc848008",
+  "testset_hash": "sha256:1a44ebfa33243c7e5a39a0a33e2a3cc90a17dc533a3faae1f36aae513821d659",
+  "timestamp": "2026-10-30T21:51:03Z",
+  "grade": 100.0,
+  "evaluation_status": "complete",
+  "grade_fingerprint": "sha256:09ad5732cf9ab0b508fe0d85a4ecd4b92cd72e25211e31242ee1847be7074fb6",
+  "scoring": {
+    "grade": 100.0,
+    "status": "complete",
+    "formula": "grade = 100 * sum(weight_i * score_i) / sum(applicable_weights)",
+    "applicable_weight": 1.0,
+    "total_weight": 1.0,
+    "excluded_metrics": [],
+    "zeroed_metrics": [],
+    "policy": {
+      "unavailable_policy": "renormalize",
+      "compile_failure_policy": "partial",
+      "weight_sum_policy": "error"
+    }
+  },
+  "first_pass": {
+    "compiled": true,
+    "smoke_ok": true,
+    "smoke_ran": true,
+    "suspected_infinite_loop": false,
+    "smoke_crashed": false,
+    "smoke_detail": "exited cleanly in 0.198 s",
+    "static_sanity": {
+      "has_main": true,
+      "calls_reader": true,
+      "calls_writer": true,
+      "main_returns": true
+    }
+  },
+  "compilation": {
+    "success": true,
+    "compiler": "gcc",
+    "compiler_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+    "flags": [
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-std=c11"
+    ],
+    "exit_code": 0,
+    "output": "",
+    "diagnostics": []
+  },
+  "execution": {
+    "name": "seatbelt",
+    "isolated": true,
+    "guarantees": "macOS sandbox-exec: file writes, fork/exec of other programs, network connections and reads outside system paths are denied for the program; memory enforced by polling the physical footprint",
+    "limits": {
+      "time_limit_s": 2.0,
+      "memory_limit_mb": 128
+    }
+  },
+  "metrics": [
+    {
+      "name": "correctness",
+      "analyzer": "io_tests",
+      "status": "scored",
+      "score": 1.0,
+      "weight": 0.3,
+      "contribution": 30.0,
+      "max_contribution": 30.0,
+      "threshold": null,
+      "met_threshold": null,
+      "feedback": "6 of 6 tests pass.",
+      "evidence": {
+        "tests_passed": 6,
+        "tests_total": 6,
+        "comparison": "trim_trailing",
+        "status_counts": {
+          "passed": 6
+        },
+        "results": [
+          {
+            "test_id": "01",
+            "status": "passed",
+            "description": "Small mixed input with a duplicate",
+            "input": "5\n3 1 4 1 5\n",
+            "expected": "1 1 3 4 5\n",
+            "actual": "1 1 3 4 5\n",
+            "stderr": "",
+            "exit_code": 0,
+            "duration_s": 0.0078,
+            "peak_memory_kb": 3648,
+            "comparison": "trim_trailing",
+            "diagnostic": ""
+          },
+          {
+            "test_id": "02",
+            "status": "passed",
+            "description": "Single element",
+            "input": "1\n42\n",
+            "expected": "42\n",
+            "actual": "42\n",
+            "stderr": "",
+            "exit_code": 0,
+            "duration_s": 0.0076,
+            "peak_memory_kb": 3648,
+            "comparison": "trim_trailing",
+            "diagnostic": ""
+          },
+          {
+            "test_id": "03",
+            "status": "passed",
+            "description": "Negative values",
+            "input": "4\n-1 -5 0 3\n",
+            "expected": "-5 -1 0 3\n",
+            "actual": "-5 -1 0 3\n",
+            "stderr": "",
+            "exit_code": 0,
+            "duration_s": 0.0075,
+            "peak_memory_kb": 3648,
+            "comparison": "trim_trailing",
+            "diagnostic": ""
+          },
+          {
+            "test_id": "04",
+            "status": "passed",
+            "description": "Already sorted",
+            "input": "6\n1 2 3 4 5 6\n",
+            "expected": "1 2 3 4 5 6\n",
+            "actual": "1 2 3 4 5 6\n",
+            "stderr": "",
+            "exit_code": 0,
+            "duration_s": 0.0073,
+            "peak_memory_kb": 3648,
+            "comparison": "trim_trailing",
+            "diagnostic": ""
+          },
+          {
+            "test_id": "05",
+            "status": "passed",
+            "description": "Reverse sorted",
+            "input": "6\n6 5 4 3 2 1\n",
+            "expected": "1 2 3 4 5 6\n",
+            "actual": "1 2 3 4 5 6\n",
+            "stderr": "",
+            "exit_code": 0,
+            "duration_s": 0.0074,
+            "peak_memory_kb": 3648,
+            "comparison": "trim_trailing",
+            "diagnostic": ""
+          },
+          {
+            "test_id": "06",
+            "status": "passed",
+            "description": "INT_MIN and INT_MAX",
+            "input": "3\n2147483647 -2147483648 0\n",
+            "expected": "-2147483648 0 2147483647\n",
+            "actual": "-2147483648 0 2147483647\n",
+            "stderr": "",
+            "exit_code": 0,
+            "duration_s": 0.0073,
+            "peak_memory_kb": 3648,
+            "comparison": "trim_trailing",
+            "diagnostic": ""
+          }
+        ]
+      },
+      "counterexamples": []
+    },
+    {
+      "name": "logical",
+      "analyzer": "edge_case_runner",
+      "status": "scored",
+      "score": 1.0,
+      "weight": 0.15,
+      "contribution": 15.0,
+      "max_contribution": 15.0,
+      "threshold": null,
+      "met_threshold": null,
+      "feedback": "20 of 20 generated corner cases pass.",
+      "evidence": {
+        "cases_passed": 20,
+        "cases_total": 20,
+        "by_category": {
+          "empty_array": {
+            "passed": 1,
+            "total": 1
+          },
+          "single_element": {
+            "passed": 3,
+            "total": 3
+          },
+          "duplicates": {
+            "passed": 2,
+            "total": 2
+          },
+          "already_sorted": {
+            "passed": 1,
+            "total": 1
+          },
+          "reverse_sorted": {
+            "passed": 1,
+            "total": 1
+          },
+          "negatives": {
+            "passed": 2,
+            "total": 2
+          },
+          "extreme_values": {
+            "passed": 3,
+            "total": 3
+          },
+          "whitespace": {
+            "passed": 2,
+            "total": 2
+          },
+          "random": {
+            "passed": 5,
+            "total": 5
+          }
+        },
+        "seed": 7,
+        "oracle": "reference_solution",
+        "unusable_cases": []
+      },
+      "counterexamples": []
+    },
+    {
+      "name": "complexity",
+      "analyzer": "complexity_estimator",
+      "status": "scored",
+      "score": 1.0,
+      "weight": 0.2,
+      "contribution": 20.0,
+      "max_contribution": 20.0,
+      "threshold": null,
+      "met_threshold": null,
+      "feedback": "Estimated O(n log n), within the required O(n log n).",
+      "evidence": {
+        "required": "O(n log n)",
+        "estimated": "O(n log n)",
+        "sizes": [
+          100,
+          200,
+          400,
+          800,
+          1600,
+          3200
+        ],
+        "operation_counts": [
+          2790,
+          6169,
+          13542,
+          29489,
+          63736,
+          137032
+        ],
+        "fit_errors": {
+          "O(1)": 0.750119,
+          "O(log n)": 0.440247,
+          "O(n)": 0.059571,
+          "O(n log n)": 0.015006,
+          "O(n^2)": 0.389095,
+          "O(n^3)": 0.548532,
+          "O(2^n)": 0.750119
+        },
+        "method": "basic-block counts at -O0, fitted to growth classes",
+        "confidence": "moderate"
+      },
+      "counterexamples": []
+    },
+    {
+      "name": "memory_safety",
+      "analyzer": "sanitizer_run",
+      "status": "scored",
+      "score": 1.0,
+      "weight": 0.1,
+      "contribution": 10.0,
+      "max_contribution": 10.0,
+      "threshold": null,
+      "met_threshold": null,
+      "feedback": "No diagnostics on 6 exercised input(s).",
+      "evidence": {
+        "inputs_exercised": 6,
+        "flags": [
+          "-fsanitize=address,undefined"
+        ],
+        "diagnostics": [],
+        "note": "Absence of diagnostics covers only the exercised inputs and does not prove memory safety."
+      },
+      "counterexamples": []
+    },
+    {
+      "name": "structure",
+      "analyzer": "static_analysis",
+      "status": "scored",
+      "score": 1.0,
+      "weight": 0.05,
+      "contribution": 5.0,
+      "max_contribution": 5.0,
+      "threshold": null,
+      "met_threshold": null,
+      "feedback": "0 cppcheck finding(s); 0 function(s) over thresholds.",
+      "evidence": {
+        "cppcheck_findings": [],
+        "functions": [
+          {
+            "name": "merge",
+            "cyclomatic": 7,
+            "length": 15,
+            "tokens": 139,
+            "parameters": 5,
+            "line": 6
+          },
+          {
+            "name": "merge_sort",
+            "cyclomatic": 2,
+            "length": 9,
+            "tokens": 78,
+            "parameters": 4,
+            "line": 24
+          },
+          {
+            "name": "print_values",
+            "cyclomatic": 3,
+            "length": 6,
+            "tokens": 51,
+            "parameters": 2,
+            "line": 34
+          },
+          {
+            "name": "main",
+            "cyclomatic": 8,
+            "length": 22,
+            "tokens": 154,
+            "parameters": 0,
+            "line": 41
+          }
+        ],
+        "thresholds": {
+          "max_cyclomatic": 10,
+          "max_function_length": 50
+        }
+      },
+      "counterexamples": []
+    },
+    {
+      "name": "modularity",
+      "analyzer": "function_split",
+      "status": "scored",
+      "score": 1.0,
+      "weight": 0.05,
+      "contribution": 5.0,
+      "max_contribution": 5.0,
+      "threshold": null,
+      "met_threshold": null,
+      "feedback": "4 functions, 3 helper(s) in use.",
+      "evidence": {
+        "functions_defined": 4,
+        "expected_min": 3,
+        "names": [
+          "merge",
+          "merge_sort",
+          "print_values",
+          "main"
+        ],
+        "helpers_reachable_from_main": [
+          "merge",
+          "merge_sort",
+          "print_values"
+        ],
+        "helpers_unused": [],
+        "main_share_of_function_lines": 0.426,
+        "criteria": {
+          "function_count": 1.0,
+          "helpers_called": 1.0,
+          "main_share": 1.0
+        }
+      },
+      "counterexamples": []
+    },
+    {
+      "name": "readability",
+      "analyzer": "llm_review",
+      "status": "scored",
+      "score": 1.0,
+      "weight": 0.05,
+      "contribution": 5.0,
+      "max_contribution": 5.0,
+      "threshold": null,
+      "met_threshold": null,
+      "feedback": "Reads cleanly on all criteria.",
+      "evidence": {
+        "method": "deterministic checks; any LLM text is advisory and unscored",
+        "criteria": {
+          "identifiers": 1.0,
+          "comments": 1.0,
+          "formatting": 1.0,
+          "function_length": 1.0,
+          "nesting": 1.0
+        },
+        "identifiers": {
+          "names_checked": 17,
+          "short_names": []
+        },
+        "comments": {
+          "comments": 3,
+          "non_blank_lines": 57
+        },
+        "formatting": {
+          "lines_checked": 52,
+          "multiple_statements": [],
+          "cramped_operators": [],
+          "unindented": [],
+          "long_lines": []
+        },
+        "function_lengths": [
+          16,
+          9,
+          6,
+          23
+        ],
+        "max_nesting_by_function": [
+          1,
+          1,
+          1,
+          2
+        ],
+        "llm": {
+          "status": "disabled"
+        }
+      },
+      "counterexamples": []
+    },
+    {
+      "name": "originality",
+      "analyzer": "similarity_flag",
+      "status": "scored",
+      "score": 1.0,
+      "weight": 0.05,
+      "contribution": 5.0,
+      "max_contribution": 5.0,
+      "threshold": null,
+      "met_threshold": null,
+      "feedback": "Max similarity 0.16 against 1 file(s); not flagged.",
+      "evidence": {
+        "metric": "Jaccard over 5-token shingles of normalized tokens",
+        "comparisons": 1,
+        "max_similarity": 0.1618,
+        "closest": "peers/peer_insertion.c",
+        "threshold": 0.85,
+        "containment_threshold": 0.95,
+        "submission_shingles": 285,
+        "top_matches": [
+          {
+            "target": "peers/peer_insertion.c",
+            "kind": "peers",
+            "jaccard": 0.1618,
+            "containment": 0.193
+          }
+        ],
+        "style_signals_advisory": [],
+        "limitations": "Similarity is grounds for review, not proof. It cannot see sources outside the corpus and cannot identify LLM authorship."
+      },
+      "counterexamples": []
+    },
+    {
+      "name": "banned_calls",
+      "analyzer": "pattern_check",
+      "status": "scored",
+      "score": 1.0,
+      "weight": 0.05,
+      "contribution": 5.0,
+      "max_contribution": 5.0,
+      "threshold": null,
+      "met_threshold": null,
+      "feedback": "All source rules satisfied.",
+      "evidence": {
+        "violations": []
+      },
+      "counterexamples": []
+    }
+  ],
+  "flags": [],
+  "feedback": {
+    "where_you_failed": [],
+    "suggestions": [],
+    "skipped_checks": [],
+    "advisory_llm_remarks": []
+  },
+  "tool_versions": {
+    "compiler": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+    "lizard": "1.24.3",
+    "cppcheck": "Cppcheck 2.22.0 from cppcheck-wheel 1.5.3"
+  },
+  "usefulness_limitations": {
+    "usefulness": [
+      {
+        "use_case": "First-pass grading of large programming classes",
+        "example": "A lab of 300 students submits add.c. The agent grades each one unattended under the same rules, so two teaching assistants no longer apply different standards, and a hung submission costs only its time limit.",
+        "benefit": "Consistent, repeatable marks, with staff time moved to reviewing the unusual cases."
+      },
+      {
+        "use_case": "Instant formative feedback before a deadline",
+        "example": "A student whose program prints -2147483648 for 2147483647 + 1 sees that exact input, the expected output, and a note that a gap of 2^32 is the signature of 32-bit overflow, then fixes it the same evening.",
+        "benefit": "Students learn from a specific failing case rather than a bare mark."
+      },
+      {
+        "use_case": "Plagiarism and LLM-copy triage for instructors",
+        "example": "A renamed copy of a peer's program scores 1.00 against the 0.85 threshold, so the agent flags that pair. The instructor reviews flagged pairs rather than all 300 submissions.",
+        "benefit": "Manual checking is narrowed to the suspicious cases, with the decision left to a person."
+      },
+      {
+        "use_case": "Coding-interview and hiring screens",
+        "example": "A company runs 500 candidate solutions for a sorting task. The agent separates O(n log n) from O(n^2) solutions using operation counts and reports corner-case failures for each candidate.",
+        "benefit": "Fast first-round filtering in which every rejection can be explained metric by metric."
+      }
+    ],
+    "limitations": [
+      {
+        "limitation": "Tests cannot prove correctness",
+        "example": "submissions/examples/add_passes_but_wrong.c returns 0 only for the input 31337 271828. No test or generated case tries that input, so the agent reports 10/10 tests and full marks for a wrong program.",
+        "mitigation": "Add property-based inputs and a larger seeded random budget, and treat a pass as evidence, not proof."
+      },
+      {
+        "limitation": "Sanitizers only see executed paths",
+        "example": "submissions/examples/add_hidden_memory_bug.c overflows a heap block only when the first number is 31337. No input reaches it, so memory_safety reports no diagnostics and full marks, and the bug remains.",
+        "mitigation": "Add Cppcheck-style static checks, widen the inputs, and never present a clean sanitizer run as proof of safety."
+      },
+      {
+        "limitation": "Complexity estimates cannot see inside library calls",
+        "example": "A loop that calls strlen(text) in its condition is really O(n^2), but libc is not instrumented, so only the loop's own blocks are counted and the agent reports O(n). See tests/test_limitations.py.",
+        "mitigation": "Combine with a timing curve or treat known linear libc calls in loops as a warning. Report the estimate as an estimate."
+      },
+      {
+        "limitation": "Similarity gives false positives on trivial problems",
+        "example": "Two students independently write the shortest possible add.c. With so few tokens their normalized programs are identical, so the agent reports similarity 1.00 and raises a flag although neither copied.",
+        "mitigation": "The report labels very short programs as low confidence, and a flag only ever asks for human review. Exclude starter code with template_file."
+      },
+      {
+        "limitation": "Similarity misses structural rewrites and unseen sources",
+        "example": "An LLM-written solution that is absent from the corpus, or a copy reordered into differently shaped functions, scores low and is not flagged. The agent cannot search the internet or identify LLM authorship.",
+        "mitigation": "Seed the corpus with solutions generated by common LLMs and public tutorials, and use viva questions to confirm ownership."
+      }
+    ]
+  }
+}
